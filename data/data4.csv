@@ -1,0 +1,5 @@
+﻿sample,Shape,Size,Color,Surface,Thickness,Target Concept
+1,Circular,Large,Light,Smooth,Thick,Yes
+2,Circular,Large,Light,Irregular,Thick,Yes
+3,Oval,Large,Dark,Smooth,Thin,No
+4,Oval,Large,Light,Irregular,Thick,Yes
