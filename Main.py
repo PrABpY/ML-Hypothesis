@@ -38,7 +38,7 @@ def Find_S(data_X,S):
 			S[i] = '?' 
 
 X = []
-with open('data/data1.csv') as fileR :
+with open('data/data4.csv') as fileR :
 	data = csv.reader(fileR)
 	for i in data :
 		del i[0]
@@ -175,7 +175,7 @@ for i in product_Geo:
 	product_Geo_1,product_Geo_2 = ''.join(i[0]).replace('?',''),i[1]
 	# print(i)
 	# print([product_Geo_1,product_Geo_2])
-	if product_Geo_1 != product_Geo_2 and product_Geo_2 != '?':
+	if product_Geo_2 != '?':
 		if sorted([product_Geo_1,product_Geo_2]) not in list_product_Go or list_product_Go == None:
 			list_product_Go.append([product_Geo_1,product_Geo_2])
 			# print([product_Geo_1,product_Geo_2],"#")
@@ -187,5 +187,15 @@ for j in range(len(list_product_Go)) :
 				# print(list_product_Go[j][k],i)
 				list_product[i] = list_product_Go[j][k]
 	product.append(list_product)
+if Geo == [S] : product = Geo
 
 print(product)
+
+inp = ['Circular','Large','Light','Smooth','Thin']
+score = 0
+
+for i in range(len(inp)):
+	for j in range(len(product)) :
+		if inp[i] == product[j][i] : 
+			score += 1
+print(score)
