@@ -38,7 +38,7 @@ def Find_S(data_X,S):
 			S[i] = '?' 
 
 X = []
-with open('data/data4.csv') as fileR :
+with open('data/data5.csv') as fileR :
 	data = csv.reader(fileR)
 	for i in data :
 		del i[0]
@@ -150,27 +150,35 @@ product_Geo = itertools.product(Geo,S)
 list_product_Go = []
 product = []
 
-for i in product_Geo:
-	product_Geo_1,product_Geo_2 = ''.join(i[0]).replace('?',''),i[1]
-	if product_Geo_2 != '?':
-		if sorted([product_Geo_1,product_Geo_2]) not in list_product_Go or list_product_Go == None:
-			list_product_Go.append([product_Geo_1,product_Geo_2])
-for j in range(len(list_product_Go)) :
-	list_product = ['?']*(len(X[0])-1)
-	for k in range(2):
-		for i in range(len(S)):
-			if S[i] == list_product_Go[j][k]: 
-				list_product[i] = list_product_Go[j][k]
-	product.append(list_product)
+#----------------------------------------------------------------------------------------------------------
+# for i in product_Geo:
+# 	product_Geo_1,product_Geo_2 = ''.join(i[0]).replace('?',''),i[1]
+# 	if product_Geo_2 != '?':
+# 		if sorted([product_Geo_1,product_Geo_2]) not in list_product_Go or list_product_Go == None:
+# 			list_product_Go.append([product_Geo_1,product_Geo_2])
+# for j in range(len(list_product_Go)) :
+# 	list_product = ['?']*(len(X[0])-1)
+# 	for k in range(2):
+# 		for i in range(len(S)):
+# 			if S[i] == list_product_Go[j][k]: 
+# 				list_product[i] = list_product_Go[j][k]
+# 	product.append(list_product)
+#----------------------------------------------------------------------------------------------------------
+
+if Geo != [S] :
+	product.append(S)
+	for i in Geo:
+		product.append(i)
+
 if Geo == [S] : product = Geo
 
 print(product)
 
-inp = ['Circular','Large','Light','Smooth','Thin']
-score = 0
+# inp = ['Round','Triangle','Round','Purple','Yes']
+# score = 0
 
-for i in range(len(inp)):
-	for j in range(len(product)) :
-		if inp[i] == product[j][i] : 
-			score += 1
-print(score)
+# for i in range(len(inp)):
+# 	for j in range(len(product)) :
+# 		if inp[i] == product[j][i] : 
+# 			score += 1
+# print(score)
