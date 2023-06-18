@@ -1,15 +1,12 @@
 import lib.Hyposis as lb
 
 Hypo = lb.Hypo()
-head = ['Sky','Temp','Humid','Wind','Water','Forecast']
-Hypo.Create(title = "Hypothesis1",content = head,solution = "Play")
-data = Hypo.Format("data3.csv")
-find_s = Hypo.FindS(data,Correct = 'Yes')
+data = Hypo.Format("data/data4.csv")
+find_s = Hypo.FindS(data,CorrectP = "Yes",CorrectN = "No")
 # Hypo.HypoAll(data)
 print(find_s)
-elimination = Hypo.Elimination(data,Correct = "Yes")
-inp = ['Sunny', 'Cool', 'Normal', 'Strong', 'Warm', 'Change']
-# score = Hypo.Score(inp,product = elimination)
-# part = Hypo.Partscore(score)
-# print(score)
+elimination = Hypo.Elimination(data,CorrectP = "Yes",CorrectN = ["No","-"])
+inp = ['Circular','Large','Light','Irregular','Thick']
+score = Hypo.Score(inp,product = elimination)
+print(score)
 print(elimination)

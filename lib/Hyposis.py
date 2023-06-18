@@ -3,16 +3,6 @@ import numpy as np
 import itertools
 
 class Hypo():
-	def Create(self,title = "__Hypothesis__",content = ['Head 1','Head 2','Head 3'],solution = "Result") :
-		filename = title+'.csv'
-		HeadHypo = ['Sample.']
-		HeadHypo += content
-		HeadHypo += [solution]
-		# print(Head Hypo)
-		with open(filename,'w') as csvfile :
-			write = csv.writer(csvfile)
-			write.writerow(HeadHypo)
-
 	def Format(self,file):
 		X = []
 		with open(file) as fileR :
@@ -24,10 +14,10 @@ class Hypo():
 		del X[0]
 		return X
 
-	def FindS(self,data,Correct):
+	def FindS(self,data,CorrectP = "Yes",CorrectN = "No"):
 		S = ['']*(len(data[0])-1)
 		for data_X in data:
-			if data_X[-1] == Correct:
+			if data_X[-1] in CorrectP:
 				for i in range(len(data_X)-1) :
 					if data_X[i] == S[i] or S[i] == '':
 						S[i] = data_X[i] 
@@ -65,54 +55,91 @@ class Hypo():
 			print(count_Hypo,Hypo_all_sort,answer)
 			count_Hypo += 1
 
-	def Elimination(self,data,Correct = "Yes"):
+	def Elimination(self,data,CorrectP = "Yes",CorrectN = "No"):
 		def Candidate_Elimination(X):
+			global S
 			Sample = ['']*(len(X[0])-1)
 			Geo,Geom = [],[]
+			Hd = np.array(data)
+			n = Hd.shape[1]
+			a = []
+			S = ['']*(len(data[0])-1)
+			for data_X in data:
+				if data_X[-1] in CorrectP:
+					for i in range(len(data_X)-1) :
+						if data_X[i] == S[i] or S[i] == '':
+							S[i] = data_X[i] 
+						if data_X[i] != S[i] and S[i] != '':
+							S[i] = '?' 
+			for result_01 in range(n):
+				a.append(sorted(list(set(Hd[:,result_01]))))
 			for i in range(len(X)):
 				delete_Geo = []
-				if X[i][-1] == Correct:
-					for j in range(len(X[i])-1):
-						if X[i][j] == Sample[j] or Sample[j] == '':
-							Sample[j] = X[i][j]
-						if X[i][j] != Sample[j] and Sample[j] != '':
-							Sample[j] = '?'
-						for k in range(len(Geo)):
-							for l in range(len(Geo[k])):
-								if X[i][j] == Geo[k][l] and Geo[k][l] != "?" :
-									delete_Geo.append(k)
-									Geom.append(Geo[k])
+				if X[i][-1] in CorrectP:
+					for j in range(len(Geo)):
+						for GeoFor in range(len(Geo[j])):
+							for XFor in range(len(X[i])):
+								if Geo[j][GeoFor] != '?':
+									if X[i][XFor] != Geo[j][GeoFor] and XFor == GeoFor:
+										delete_Geo.append(j)
+										# print(j)
+					count_delete = 0
+					for delete in list(set(delete_Geo)):
+						del Geo[delete-count_delete]
+						count_delete += 1
 
-				else :
-					# Geo_list = []
-					for j in range(len(X[i])-1):
-						if X[i][j] != Sample[j] and Sample[j] != "?": 
-							Geo_list = ['?']*j
-							Geo_list.append(Sample[j])
-							while len(Geo_list) < len(Sample):
-								Geo_list.append("?")
-							Geo.append(Geo_list)
+				if X[i][-1] in CorrectN:
+					if len(Geo) >= 1 :
+						Gro_store,GeoF = [],[]
+						for j in range(len(Geo)):
+							B_count = "None"
+							for k in range(len(Geo[j])):
+								if Geo[j][k] != "?":
+									for num in range(len(X[i])-1):
+										if num == k and Geo[j][k] == X[i][num]:
+											for num2 in range(len(X[i])-1):
+												if num2 == num :
+													continue
+												for result in range(len(a[num2])-1):
+													if X[i][num2] != a[num2][result] and B_count == "None":
+														for lis in Geo[j] :
+															GeoF.append(lis)
+														GeoF[num2] = a[num2][result]
+														Gro_store.append(GeoF)
+														delete_Geo.append(j)
+														GeoF = []
+						delete_Geo = list(set(delete_Geo))
+						count_delete = 0
+						for delete in delete_Geo:
+							del Geo[delete-count_delete]
+							# print(Geo)
+							count_delete += 1
+						for dem in Gro_store:
+							Geo.append(dem)
 
-			return Geom,Sample
+					else :
+						for j in range(len(X[i])-1):
+							if X[i][j] != Sample[j] and Sample[j] != "?":
+								for k in range(len(a[j])):
+									Geo_list = ['?']*j
+									if a[j][k-1] != X[i][j]:
+										Geo_list.append(a[j][k-1])
+										while len(Geo_list) < len(Sample):
+											Geo_list.append("?")
+										Geo.append(Geo_list)
+				# print(i+1,Geo)           # Step
+			return Geo
 
-		global list_product_Go
-		Geo,Sample = Candidate_Elimination(data)
-		product_Geo = itertools.product(Geo,Sample)
-		list_product_Go = []
+		global S
+		Geo = Candidate_Elimination(data)
 		product = []
 
-		for i in product_Geo:
-			product_Geo_1,product_Geo_2 = ''.join(i[0]).replace('?',''),i[1]
-			if product_Geo_1 != product_Geo_2 and product_Geo_2 != '?':
-				if sorted([product_Geo_1,product_Geo_2]) not in list_product_Go or list_product_Go == None:
-					list_product_Go.append([product_Geo_1,product_Geo_2])
-		for j in range(len(list_product_Go)) :
-			list_product = ['?']*(len(data[0])-1)
-			for k in range(2):
-				for i in range(len(Sample)):
-					if Sample[i] == list_product_Go[j][k]:
-						list_product[i] = list_product_Go[j][k]
-			product.append(list_product)
+		if Geo != [S] :
+			product.append(S)
+			for i in Geo:
+				product.append(i)
+
+		if Geo == [S] : product = Geo
 
 		return product
 
@@ -122,10 +149,9 @@ class Hypo():
 			for j in range(len(product)) :
 				if inp[i] == product[j][i] : 
 					score += 1
-
 		part = "UNSURE"
 		if len(product) == 1:
-			if score == len(product[0]) : part = "ACCEPT"
+			if score > len(product) : part = "ACCEPT"
 			else : part = "REJECT"
 			return score,part
 
