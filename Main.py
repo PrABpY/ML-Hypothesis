@@ -82,16 +82,6 @@ for i in range(len(Hypo_all)) :
 	# print(count_Hypo,Hypo_all_sort,answer) #++++++++++++++++++++++++++++++
 	count_Hypo += 1
 
-print("\n")
-
-# inp = ['?', '?', '?', '?', '?', '?']
-# score = 0
-
-# for i in range(len(inp)):
-# 	for j in range(len(product)) :
-# 		if inp[i] == product[j][i] : 
-# 			score += 1
-
 def Candidate_Elimination_V2(X,a):
 	Sample = ['']*(len(X[0])-1)
 	Geo,Geom = [],[]
@@ -100,9 +90,6 @@ def Candidate_Elimination_V2(X,a):
 		delete_Geo = []
 		if X[i][-1] == "Yes":
 			for j in range(len(Geo)):
-				# list_Geo_intersec = set(Geo[j]).intersection(set(X[i]))
-				# num_geo = len(list(set(Geo[j])))-1
-				# print(X[i],Geo[j])
 				for GeoFor in range(len(Geo[j])):
 					for XFor in range(len(X[i])):
 						if Geo[j][GeoFor] != '?':
@@ -112,7 +99,6 @@ def Candidate_Elimination_V2(X,a):
 			count_delete = 0
 			for delete in list(set(delete_Geo)):
 				del Geo[delete-count_delete]
-				# print(Geo)
 				count_delete += 1
 
 		if X[i][-1] == "No":
@@ -122,10 +108,8 @@ def Candidate_Elimination_V2(X,a):
 					B_count = "None"
 					for k in range(len(Geo[j])):
 						if Geo[j][k] != "?":
-							# print(Geo[j][k],j,k)
 							for num in range(len(X[i])-1):
 								if num == k and Geo[j][k] == X[i][num]:
-									# print(X[i][j])
 									for num2 in range(len(X[i])-1):
 										if num2 == num :
 											continue
@@ -134,7 +118,6 @@ def Candidate_Elimination_V2(X,a):
 												for lis in Geo[j] :
 													GeoF.append(lis)
 												GeoF[num2] = a[num2][result]
-												# print(GeoF)
 												Gro_store.append(GeoF)
 												delete_Geo.append(j)
 												GeoF = []
@@ -153,16 +136,12 @@ def Candidate_Elimination_V2(X,a):
 			else :
 				for j in range(len(X[i])-1):
 					if X[i][j] != Sample[j] and Sample[j] != "?":
-						# print(X[i][j]) b
 						for k in range(len(a[j])):
 							Geo_list = ['?']*j
-							# print(a[j][k-1])
 							if a[j][k-1] != X[i][j]:
-								# print(X[i][j],a[j][k-1])
 								Geo_list.append(a[j][k-1])
 								while len(Geo_list) < len(Sample):
 									Geo_list.append("?")
-								# print(i+1,Geo_list)
 								Geo.append(Geo_list)
 		print(i+1,Geo)           # Step
 	return Geo
@@ -173,18 +152,14 @@ product = []
 
 for i in product_Geo:
 	product_Geo_1,product_Geo_2 = ''.join(i[0]).replace('?',''),i[1]
-	# print(i)
-	# print([product_Geo_1,product_Geo_2])
 	if product_Geo_2 != '?':
 		if sorted([product_Geo_1,product_Geo_2]) not in list_product_Go or list_product_Go == None:
 			list_product_Go.append([product_Geo_1,product_Geo_2])
-			# print([product_Geo_1,product_Geo_2],"#")
 for j in range(len(list_product_Go)) :
 	list_product = ['?']*(len(X[0])-1)
 	for k in range(2):
 		for i in range(len(S)):
 			if S[i] == list_product_Go[j][k]: 
-				# print(list_product_Go[j][k],i)
 				list_product[i] = list_product_Go[j][k]
 	product.append(list_product)
 if Geo == [S] : product = Geo
