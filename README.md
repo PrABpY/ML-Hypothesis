@@ -31,6 +31,8 @@ Sample | Citation | Size | InLibrary | Price | Edition | Buy
 	
 	# find_s -> [['Many', '?', 'No', '?', '?']]
 
+	#-------------------------------------------------------
+
 	# Hypothesis all
 	Hypo.HypoAll(data)
 	
@@ -103,3 +105,10 @@ Sample | Citation | Size | InLibrary | Price | Edition | Buy
 		66 ['Some', 'Small', 'No', 'Expensive', 'Many'] Yes
 		67 ['Some', 'Small', 'No', 'Expensive', 'One'] No
 		68 ['Some', 'Small', 'No', 'Expensive', 'One'] Yes
+
+	#-------------------------------------------------------
+
+	# Candidate elimination
+	elimination = Hypo.Elimination(data,CorrectP = "Yes",CorrectN = "No")
+
+	# elimination -> [['Many', '?', 'No', '?', '?'], ['Many', '?', '?', '?', '?']]
