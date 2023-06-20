@@ -112,3 +112,11 @@ Sample | Citation | Size | InLibrary | Price | Edition | Buy
 	elimination = Hypo.Elimination(data,CorrectP = "Yes",CorrectN = "No")
 
 	# elimination -> [['Many', '?', 'No', '?', '?'], ['Many', '?', '?', '?', '?']]
+
+	#-------------------------------------------------------
+
+	# Check Hypothesis
+	Input = ['Many','Small','Yes','Affordable','Few']
+	Result = Hypo.Checkpart(Input,product = elimination)
+
+	# Result -> (66.66666666666666, 'ACCEPT')   "(%,Result)"

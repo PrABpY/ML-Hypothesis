@@ -143,21 +143,20 @@ class Hypo():
 
 		return product
 
-	def Score(self,inp,product = [['?']]):
-		score = 0
+	def Checkpart(self,inp,product = [['?']]):
+		score,scoreall = 0,0
 		for i in range(len(inp)):
 			for j in range(len(product)) :
 				if inp[i] == product[j][i] : 
 					score += 1
-		part = "UNSURE"
-		if len(product) == 1:
-			if score > len(product) : part = "ACCEPT"
-			else : part = "REJECT"
-			return score,part
+		for i in range(len(product)):
+			for j in range(len(product[i])):
+				if product[i][j] != "?" : scoreall += 1
 
-		if score > len(product) : part = "ACCEPT"
-		if score < len(product) : part = "REJECT"
-		return score,part	
+		part = "UNSURE"
+		if score > scoreall/2 : part = "ACCEPT"
+		if score < scoreall/2 : part = "REJECT"
+		return (score/3*100),part	
 
 
 if __name__  == "__main__" :
