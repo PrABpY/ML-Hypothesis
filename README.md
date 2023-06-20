@@ -14,6 +14,7 @@ Sample | Header1 | Header2 | ... | Result
 4 | - | - | - | (+,-) |
 
 ### _Ex_
+file name "_Sample.csv_"
 Sample | Citation | Size | InLibrary | Price | Edition | Buy
 ----- | ----- | ----- | ----- | ----- | ----- | ----- |
 1 | Some | Small | No | Affordable | One | No |
@@ -21,3 +22,6 @@ Sample | Citation | Size | InLibrary | Price | Edition | Buy
 3 | Many | Medium | No | Expensive | Few | Yes |
 4 | Many | Small | No | Affordable | Many | Yes |
 
+	# Find-S
+	Hypo = lb.Hypo()
+	data = Hypo.Format("Sample.csv")
