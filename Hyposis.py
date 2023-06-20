@@ -24,7 +24,7 @@ class Hypo():
 					if data_X[i] != S[i] and S[i] != '':
 						S[i] = '?' 
 		return [S]
-
+ 
 	def HypoAll(self,data):
 		global a
 		Hd = np.array(data)
