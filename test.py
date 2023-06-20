@@ -9,4 +9,4 @@ elimination = Hypo.Elimination(data,CorrectP = "Yes",CorrectN = ["No","-"])
 Input = ['Many','Small','Yes','Affordable','Few']
 Result = Hypo.Checkpart(Input,product = elimination)
 print(Result)
-print(elimination)
+print(elimination) 
