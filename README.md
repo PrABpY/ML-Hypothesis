@@ -14,3 +14,10 @@ Sample | Header1 | Header2 | ... | Result
 4 | - | - | - | (+,-) |
 
 ### _Ex_
+Sample | Citation | Size | InLibrary | Price | Edition | Buy
+----- | ----- | ----- | ----- | ----- | ----- | ----- |
+1 | Some | Small | No | Affordable | One | No |
+2 | Many | Big | No | Expensive | Many | Yes |
+3 | Many | Medium | No | Expensive | Few | Yes |
+4 | Many | Small | No | Affordable | Many | Yes |
+
