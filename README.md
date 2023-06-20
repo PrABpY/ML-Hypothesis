@@ -23,5 +23,6 @@ Sample | Citation | Size | InLibrary | Price | Edition | Buy
 4 | Many | Small | No | Affordable | Many | Yes |
 
 	# Find-S
-	Hypo = lb.Hypo()
+	Hypo = Hyposis.Hypo()
 	data = Hypo.Format("Sample.csv")
+	find_s = Hypo.FindS(data,CorrectP = "Yes",CorrectN = "No")
