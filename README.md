@@ -1,3 +1,3 @@
 # Hyposis
 ### Project description
-A Hypothesis for considering wrong or right information
+A tool for generating list of Hypothesis, Which will be considered from csv file data
