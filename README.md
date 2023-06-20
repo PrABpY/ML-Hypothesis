@@ -120,3 +120,6 @@ Sample | Citation | Size | InLibrary | Price | Edition | Buy
 	Result = Hypo.Checkpart(Input,product = elimination)
 
 	# Result -> (66.66666666666666, 'ACCEPT')   "(%,Result)"
+
+
+_PrABpY_
