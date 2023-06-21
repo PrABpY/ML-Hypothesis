@@ -1,6 +1,6 @@
-import Hyposis
+import hypos
 
-Hypo = Hyposis.Hypo()
+Hypo = hypos.Hypo()
 data = Hypo.Format("Sample.csv")
 find_s = Hypo.FindS(data,CorrectP = "Yes",CorrectN = "No")
 Hypo.HypoAll(data)
