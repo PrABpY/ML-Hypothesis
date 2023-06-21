@@ -1,4 +1,4 @@
-# Hyposis
+# Hypos
 Hyposis is a tool for generating list of hypothesis , Which will be considered from examples (csv file) 
 
 ## example
@@ -25,7 +25,7 @@ Sample | Citation | Size | InLibrary | Price | Edition | Buy
 4 | Many | Small | No | Affordable | Many | Yes |
 
 	# Find-S
-	Hypo = Hyposis.Hypo()
+	Hypo = hypos.Hypo()
 	data = Hypo.Format("Sample.csv")
 	find_s = Hypo.FindS(data,CorrectP = "Yes",CorrectN = "No")
 	
