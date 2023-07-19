@@ -14,10 +14,10 @@ class Hypo():
 		del X[0]
 		return X
 
-	def FindS(self,data,CorrectP = "Yes",CorrectN = "No"):
+	def FindS(self,data,Correct = "Yes"):
 		S = ['']*(len(data[0])-1)
 		for data_X in data:
-			if data_X[-1] in CorrectP:
+			if data_X[-1] in Correct:
 				for i in range(len(data_X)-1) :
 					if data_X[i] == S[i] or S[i] == '':
 						S[i] = data_X[i] 
@@ -55,7 +55,7 @@ class Hypo():
 			print(count_Hypo,Hypo_all_sort,answer)
 			count_Hypo += 1
 
-	def Elimination(self,data,CorrectP = "Yes",CorrectN = "No"):
+	def Elimination(self,data,Correct = "Yes"):
 		def Candidate_Elimination(X):
 			global S
 			Sample = ['']*(len(X[0])-1)
@@ -65,7 +65,7 @@ class Hypo():
 			a = []
 			S = ['']*(len(data[0])-1)
 			for data_X in data:
-				if data_X[-1] in CorrectP:
+				if data_X[-1] in Correct:
 					for i in range(len(data_X)-1) :
 						if data_X[i] == S[i] or S[i] == '':
 							S[i] = data_X[i] 
@@ -75,7 +75,7 @@ class Hypo():
 				a.append(sorted(list(set(Hd[:,result_01]))))
 			for i in range(len(X)):
 				delete_Geo = []
-				if X[i][-1] in CorrectP:
+				if X[i][-1] == Correct:
 					for j in range(len(Geo)):
 						for GeoFor in range(len(Geo[j])):
 							for XFor in range(len(X[i])):
@@ -88,7 +88,7 @@ class Hypo():
 						del Geo[delete-count_delete]
 						count_delete += 1
 
-				if X[i][-1] in CorrectN:
+				if X[i][-1] != Correct:
 					if len(Geo) >= 1 :
 						Gro_store,GeoF = [],[]
 						for j in range(len(Geo)):
@@ -156,7 +156,8 @@ class Hypo():
 		part = "UNSURE"
 		if score > scoreall/2 : part = "ACCEPT"
 		if score < scoreall/2 : part = "REJECT"
-		return (score/3*100),part	
+		print(score,scoreall)
+		return (score/scoreall*100),part	
 
 
 if __name__  == "__main__" :
